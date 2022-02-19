@@ -1,6 +1,5 @@
 import React from 'react';
 import { Card, CardImg, CardText, CardBody, CardTitle } from 'reactstrap';
-import { COMMENTS } from '../shared/comments';
 
 const RenderDish = ({dish}) => {
     return (
@@ -14,25 +13,25 @@ const RenderDish = ({dish}) => {
     );
 }
 
-const RenderComments = ({dishId}) => {
+const RenderComments = ({comments}) => {
 
-    const comments = COMMENTS.map((comment) => {
-        if ( comment.dishId === dishId ) {
-            const date = new Date(comment.date.toString()),
-                dateString = date.toLocaleDateString('en-US', {year: 'numeric', month: 'short', day: 'numeric'});
-            
-            return (
-                <div tag="li" key={comment.id}>
-                    <p width="100%">{comment.comment}</p>
-                    <p width="100%">-- {comment.author}, {dateString}</p>
-                </div>
-            );
-        }
+    if ( comments === null ) return (<div></div>);
+
+    const renderedComments = comments.map((comment) => {
+        const date = new Date(comment.date.toString()),
+            dateString = date.toLocaleDateString('en-US', {year: 'numeric', month: 'short', day: 'numeric'});
+        
+        return (
+            <div tag="li" key={comment.id}>
+                <p width="100%">{comment.comment}</p>
+                <p width="100%">-- {comment.author}, {dateString}</p>
+            </div>
+        );
     });
 
     return (
         <ul className='list-ustyled'>
-            {comments}
+            {renderedComments}
         </ul>
     );
 };
@@ -49,7 +48,7 @@ const DishDetail = (props) => {
             
             <div className='col-12 col-md-5 mt-5'>
                 <h4>Comments</h4>
-                <RenderComments dishId={dish.id} />
+                <RenderComments comments={dish.comments} />
             </div>
         </div>
     );
