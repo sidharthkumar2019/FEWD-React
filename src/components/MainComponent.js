@@ -10,6 +10,7 @@ import Home from './HomeComponent';
 import Contact from './ContactComponent';
 import {Routes, Route, Navigate, useParams} from 'react-router-dom';
 import DishDetail from './DishDetailComponent';
+import About from './AboutComponent';
 
 class Main extends Component {
 
@@ -29,7 +30,7 @@ class Main extends Component {
       console.log('DishWithId invoked');
       let {dishId} = useParams();
       dishId = parseInt(dishId);
-      
+
       return(
           <DishDetail dish={this.state.dishes.filter((dish) => dish.id === dishId)[0]} 
             comments={this.state.comments.filter((comment) => comment.dishId === dishId)} />
@@ -48,6 +49,7 @@ class Main extends Component {
           <Route exact path='/menu' element={ <Menu dishes={this.state.dishes}/> } />
           <Route exact path='/menu/:dishId' element={ <DishWithId /> } />
           <Route path='/contactus' element={ <Contact /> } />
+          <Route path='/aboutus' element={ <About leaders={this.state.leaders}/> } />
           <Route path='*' element={ <Navigate to='/home' /> }/>
         </Routes>
 

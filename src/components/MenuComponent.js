@@ -5,14 +5,12 @@ import { Link } from 'react-router-dom';
 function RenderMenuItem ({dish}) {
   return (
     <Card>
-      <CardBody>
         <Link to={`/menu/${dish.id}`}>
           <CardImg width="100%" src={dish.image} alt={dish.name} />                
           <CardImgOverlay body className="ml-5">
               <CardTitle heading>{dish.name}</CardTitle>                    
           </CardImgOverlay>
         </Link>
-      </CardBody>
     </Card>
   );
 }
