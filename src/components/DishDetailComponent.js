@@ -8,7 +8,7 @@ const RenderDish = ({dish}) => {
         <Card>
             <CardBody>
                 <CardImg src={dish.image} alt={dish.name} />
-                <CardTitle heading>{dish.name}</CardTitle>
+                <CardTitle><h4>{dish.name}</h4></CardTitle>
                 <CardText>{dish.description}</CardText>
             </CardBody>
         </Card>
