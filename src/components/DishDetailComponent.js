@@ -128,9 +128,9 @@ class DishDetail extends Component {
     }
 
     handleSubmit = (val) => {
-        console.log(JSON.stringify(val));
-        alert(JSON.stringify(val));
         this.toggleModal();
+        this.props.addComment(this.props.dish.id, val.rating, val.author, val.comment);
+        console.log(this.props.dish.id, val.rating, val.author, val.comment);
     }
 
     render () {
