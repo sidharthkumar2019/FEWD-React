@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import { Card, CardImg, CardText, CardBody, CardTitle, Breadcrumb, BreadcrumbItem, Button, Modal, ModalBody, ModalHeader } from 'reactstrap';
 import { Link } from 'react-router-dom';
-import {CommentForm} from './CommentFormComponent';
+import { CommentForm } from './CommentFormComponent';
 
 const RenderDish = ({dish}) => {
     return (
@@ -54,40 +54,33 @@ class DishDetail extends Component {
             isModalOpen: !this.state.isModalOpen
         });
     }
-
-    handleSubmit = (val) => {
-        console.log(JSON.stringify(val));
-        alert(JSON.stringify(val));
-        this.toggleModal();
-    }
-
+    
     render () {
         const dish = this.props.dish;
         if ( dish === undefined || dish === null ) return (<div></div>);
-        
         return (
             <div className='container'>
                 <div className='row'>
                     <Breadcrumb>
                         <BreadcrumbItem><Link to="/menu">Menu</Link></BreadcrumbItem>
-                        <BreadcrumbItem active>{this.props.dish.name}</BreadcrumbItem>
+                        <BreadcrumbItem active>{this.prop.dish.name}</BreadcrumbItem>
                     </Breadcrumb>
                     <div className='col-12'>
-                    <h3>{this.props.dish.name}</h3>
+                    <h3>{this.prop.dish.name}</h3>
                     <hr />
                     </div>
                 </div>
                 <div className='row mb-5'>
                     <div className='col-12 col-md-5 mt-5'>
-                        <RenderDish dish={this.props.dish} />
+                        <RenderDish dish={this.prop.dish} />
                     </div>
                     
                     <div className='col-12 col-md-5 mt-5'>
                         <h4>Comments</h4>
-                        <RenderComments comments={this.props.comments} />
+                        <RenderComments comments={this.prop.comments} />
 
                         <Button outline onClick={this.toggleModal}>
-                            <span className="fa fa-pencil fa-lg"></span> Submit Comment
+                            <span className="fa fa-sign-in fa-lg"></span> Login
                         </Button>
                     </div>
                 </div>
@@ -95,12 +88,12 @@ class DishDetail extends Component {
                 <Modal isOpen={this.state.isModalOpen} toggle={this.toggleModal}>
                     <ModalHeader toggle={this.toggleModal}>Submit Comment</ModalHeader>
                     <ModalBody>
-                        <CommentForm handleSubmit={this.handleSubmit}/>
+                        <CommentForm />
                     </ModalBody>
                 </Modal>
             </div>
         );
     }
-}
+};
 
 export default DishDetail;
