@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import { Card, CardImg, CardText, CardBody, CardTitle, Breadcrumb, BreadcrumbItem, Button, Modal, ModalBody, ModalHeader, Label, Col, Row } from 'reactstrap';
 import { Control, LocalForm, Errors } from 'react-redux-form';
 import { Link } from 'react-router-dom';
+import { Loading } from './LoadingComponent';
 
 const RenderDish = ({dish}) => {
     return (
@@ -135,6 +136,24 @@ class DishDetail extends Component {
 
     render () {
         const dish = this.props.dish;
+        if ( this.props.errmess ) {
+            return (
+                <div className='container'>
+                    <div className='row'>
+                        <h4>{this.props.errmess}</h4>
+                    </div>
+                </div>
+            );
+        }
+        else if ( this.props.isLoading ) {
+            return (
+                <div className='container'>
+                    <div className='row'>
+                        <Loading />
+                    </div>
+                </div>
+            );
+        }
         if ( dish === undefined || dish === null ) return (<div></div>);
         
         return (
