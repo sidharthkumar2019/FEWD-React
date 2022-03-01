@@ -58,24 +58,24 @@ class Main extends Component {
       <div>
         <Header />
         
-        <Routes>
-          <Route path='/home' element={ <Home dish={this.props.dishes.dishes.filter( (dish) => dish.featured )[0]}
-                                        dishesLoading={this.props.dishes.isLoading}
-                                        dishesErrMess={this.props.dishes.errmess}
-                                        
-                                        promotion={this.props.promotions.promotions.filter( (promotion) => promotion.featured )[0]}
-                                        promosLoading={this.props.promotions.isLoading}
-                                        promosErrMess={this.props.promotions.errmess}
+          <Routes>
+            <Route path='/home' element={ <Home dish={this.props.dishes.dishes.filter( (dish) => dish.featured )[0]}
+                                          dishesLoading={this.props.dishes.isLoading}
+                                          dishesErrMess={this.props.dishes.errmess}
+                                          
+                                          promotion={this.props.promotions.promotions.filter( (promotion) => promotion.featured )[0]}
+                                          promosLoading={this.props.promotions.isLoading}
+                                          promosErrMess={this.props.promotions.errmess}
 
-                                        leader={this.props.leaders.filter( (leader) => leader.featured )[0]} 
-                                        /> } />
-          <Route exact path='/menu' element={ <Menu dishes={this.props.dishes}/> } />
-          <Route exact path='/menu/:dishId' element={ <DishWithId /> } />
-          <Route path='/contactus' element={ <Contact resetFeedbackForm={this.props.resetFeedbackForm}/> } />
-          <Route path='/aboutus' element={ <About leaders={this.props.leaders}/> } />
-          <Route path='*' element={ <Navigate to='/home' /> }/>
-        </Routes>
-
+                                          leader={this.props.leaders.filter( (leader) => leader.featured )[0]} 
+                                          /> } />
+            <Route exact path='/menu' element={ <Menu dishes={this.props.dishes}/> } />
+            <Route exact path='/menu/:dishId' element={ <DishWithId /> } />
+            <Route path='/contactus' element={ <Contact resetFeedbackForm={this.props.resetFeedbackForm}/> } />
+            <Route path='/aboutus' element={ <About leaders={this.props.leaders}/> } />
+            <Route path='*' element={ <Navigate to='/home' /> }/>
+          </Routes>
+        
         <Footer />
       </div>
     );

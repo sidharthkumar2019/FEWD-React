@@ -4,16 +4,19 @@ import { Control, LocalForm, Errors } from 'react-redux-form';
 import { Link } from 'react-router-dom';
 import { Loading } from './LoadingComponent';
 import { baseURL } from '../shared/baseURL';
+import { FadeTransform, Fade, Stagger } from 'react-animation-components';
 
 const RenderDish = ({dish}) => {
     return (
-        <Card>
-            <CardBody>
-                <CardImg src={baseURL+dish.image} alt={dish.name} />
-                <CardTitle><h4>{dish.name}</h4></CardTitle>
-                <CardText>{dish.description}</CardText>
-            </CardBody>
-        </Card>
+        <FadeTransform in transformProps={{exitTransform: 'scale(0.5) translateY(-50%)'}}>
+            <Card>
+                <CardBody>
+                    <CardImg src={baseURL+dish.image} alt={dish.name} />
+                    <CardTitle><h4>{dish.name}</h4></CardTitle>
+                    <CardText>{dish.description}</CardText>
+                </CardBody>
+            </Card>
+        </FadeTransform>
     );
 }
 
@@ -26,16 +29,20 @@ const RenderComments = ({comments}) => {
         dateString = date.toLocaleDateString('en-US', {year: 'numeric', month: 'short', day: 'numeric'});
         
         return (
-            <div tag="li" key={comment.id}>
-                <p width="100%">{comment.comment}</p>
-                <p width="100%">-- {comment.author}, {dateString}</p>
-            </div>
+            <Fade in>
+                <div tag="li" key={comment.id}>            
+                    <p width="100%">{comment.comment}</p>
+                    <p width="100%">-- {comment.author}, {dateString}</p>
+                </div>
+            </Fade>
         );
     });
     
     return (
         <ul className='list-ustyled'>
-            {renderedComments}
+            <Stagger in>
+                {renderedComments}
+            </Stagger>
         </ul>
     );
 };
