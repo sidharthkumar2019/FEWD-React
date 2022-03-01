@@ -1,31 +1,53 @@
 import React from 'react';
 import { Breadcrumb, BreadcrumbItem, Card, CardBody, CardHeader, Media } from 'reactstrap';
 import { Link } from 'react-router-dom';
+import { Loading } from './LoadingComponent';
+import { baseURL } from '../shared/baseURL';
+import { Fade, Stagger } from 'react-animation-components';
 
 const RenderLeader = ({leader}) => {
-
     return (
         <div key={leader.id} className="row mt-5">
-            <Media className ="col-3 ">
-                <Media object src={leader.image} alt={leader.name} />
+            <Media className ="col-12 col-md-3">
+                <Media object src={baseURL+leader.image} alt={leader.name} />
             </Media>
-            <Media body className="col-9 ml-5">
+            <Media body className="col-12  col-md-9">
             <Media heading>{leader.name}</Media>
             <p>{leader.designation}</p>
             <p>{leader.description}</p>
             </Media>
-        
         </div>
     );
 }
 
 function About(props) {
+    if ( props.errmess ) {
+        return (
+            <div className='container'>
+                <div className='row'>
+                    <h4>{props.errmess}</h4>
+                </div>
+            </div>
+        );
+    }
+    else if ( props.isLoading ) {
+        return (
+            <div className='container'>
+                <div className='row'>
+                    <Loading />
+                </div>
+            </div>
+        );
+    }
 
     const leaders = props.leaders.map((leader) => {
         return (
-            <RenderLeader leader={leader} />
+            <Fade in>
+                <RenderLeader leader={leader} />
+            </Fade>
         );
     });
+
 
     return(
         <div className="container">
@@ -85,7 +107,9 @@ function About(props) {
                 </div>
                 <div className="col-12">
                     <Media list>
-                        {leaders}
+                    <Stagger in>
+                        {leaders}   
+                    </Stagger>
                     </Media>
                 </div>
             </div>
